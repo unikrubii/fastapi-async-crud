@@ -1,7 +1,8 @@
 from app.models import Item
 from tortoise.exceptions import DoesNotExist, OperationalError, DBConnectionError
+from typing import Optional
 
-async def create_item(name: str, description: str) -> Item|None:
+async def create_item(name: str, description: str) -> Optional[Item]:
     '''
     Create a new item in the database with the given name and description.
 
@@ -23,7 +24,7 @@ async def create_item(name: str, description: str) -> Item|None:
     except DBConnectionError as e:
         raise DBConnectionError(f'Failed to connect to the database. Error details: {e}')
 
-async def get_items():
+async def get_items() -> Optional[Item]:
     '''
     Retrieve all items from the database.
 
@@ -32,7 +33,7 @@ async def get_items():
     '''
     return await Item.all()
 
-async def get_item_by_id(item_id: int) -> Item|None:
+async def get_item_by_id(item_id: int) -> Optional[Item]:
     '''
     Fetch an item by its id.
 
@@ -50,7 +51,7 @@ async def get_item_by_id(item_id: int) -> Item|None:
     except DoesNotExist:
         return None
 
-async def update_item(item_id: int, name: str, description: str) -> Item|None:
+async def update_item(item_id: int, name: str, description: str) -> Optional[Item]:
     '''
     Update an existing item by its id with the new name and description.
 
@@ -73,7 +74,7 @@ async def update_item(item_id: int, name: str, description: str) -> Item|None:
         return item
     return None
 
-async def delete_item(item_id: int) -> Item|None:
+async def delete_item(item_id: int) -> Optional[Item]:
     '''
     Delete an item by its id.
 

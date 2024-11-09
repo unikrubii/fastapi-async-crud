@@ -1,8 +1,8 @@
 from app.models import Item
-from tortoise.exceptions import DoesNotExist, IntegrityError
+from tortoise.exceptions import DoesNotExist, OperationalError, DBConnectionError
 
 async def create_item(name: str, description: str) -> Item|None:
-    """
+    '''
     Create a new item in the database with the given name and description.
 
     Args:
@@ -14,24 +14,26 @@ async def create_item(name: str, description: str) -> Item|None:
     
     Raises:
         IntegrityError: If there is a database integrity issue, such as a duplicate entry.
-    """
+    '''
     try:
         item = await Item.create(name=name, description=description)
         return item
-    except IntegrityError as e:
-        raise IntegrityError("Database integrity error: " + str(e))
+    except OperationalError as e:
+        raise OperationalError(f'Operational error during database operation: {e}')
+    except DBConnectionError as e:
+        raise DBConnectionError(f'Failed to connect to the database. Error details: {e}')
 
 async def get_items():
-    """
+    '''
     Retrieve all items from the database.
 
     Returns:
         list[Item]: A list of all items stored in the database.
-    """
+    '''
     return await Item.all()
 
 async def get_item_by_id(item_id: int) -> Item|None:
-    """
+    '''
     Fetch an item by its id.
 
     Args:
@@ -42,14 +44,14 @@ async def get_item_by_id(item_id: int) -> Item|None:
     
     Raises:
         DoesNotExist: If the item with the specified ID is not found.
-    """
+    '''
     try:
         return await Item.get(id=item_id)
     except DoesNotExist:
         return None
 
 async def update_item(item_id: int, name: str, description: str) -> Item|None:
-    """
+    '''
     Update an existing item by its id with the new name and description.
 
     Args:
@@ -62,7 +64,7 @@ async def update_item(item_id: int, name: str, description: str) -> Item|None:
     
     Raises:
         IntegrityError: If there is a database integrity issue.
-    """
+    '''
     item = await get_item_by_id(item_id)
     if item:
         item.name = name
@@ -72,7 +74,7 @@ async def update_item(item_id: int, name: str, description: str) -> Item|None:
     return None
 
 async def delete_item(item_id: int) -> Item|None:
-    """
+    '''
     Delete an item by its id.
 
     Args:
@@ -80,7 +82,7 @@ async def delete_item(item_id: int) -> Item|None:
 
     Returns:
         dict: A message indicating success or failure.
-    """
+    '''
     item = await get_item_by_id(item_id)
     if item:
         await item.delete()

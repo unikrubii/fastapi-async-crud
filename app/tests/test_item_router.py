@@ -14,7 +14,7 @@ async def test_create_item(client):
     # Make a POST request to the endpoint
     response = client.post('/items', json=data)
 
-    # Check that the response status code is 201 (Created)
+    # Check the response status code
     assert response.status_code == 201
 
     # Verify that the item is in the database by querying for it
@@ -28,7 +28,7 @@ async def test_get_all_items(client):
     '''
     Test fetching all items from the database.
     '''
-    # Make sure there are items in the DB before testing
+    # Make sure there are items in the database before testing
     await Item.create(name='Item 1', description='Description 1')
 
     response = client.get('/items/')
@@ -40,7 +40,7 @@ async def test_get_all_items(client):
 @pytest.mark.asyncio
 async def test_get_item_by_id(client):
     '''
-    Tests the endpoint that retrieves an item by its ID.
+    Tests the endpoint that retrieves an item by its id.
     '''
     item = await Item.create(name='Item 2', description='Description 2')
     

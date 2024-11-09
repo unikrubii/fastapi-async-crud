@@ -3,34 +3,6 @@ from app.crud import create_item, get_items, get_item_by_id, update_item, delete
 from app.models import Item
 from app.tests.conftest import init_db
 
-
-import pytest
-from fastapi.testclient import TestClient
-from tortoise import Tortoise
-from app.main import app
-from app.models import Item
-
-# @pytest.mark.asyncio
-# async def test_create_item(client):
-#     '''
-#     Tests the FastAPI endpoint that creates an item in the database.
-#     '''
-#     # Data to create a new item
-#     data = {'name': 'Test Item', 'description': 'This is a test item'}
-
-#     # Make a POST request to the FastAPI endpoint
-#     response = client.post('/items', json=data)
-
-#     # Check that the response status code is 201 (Created)
-#     assert response.status_code == 201
-
-#     # Verify that the item is in the database by querying for it
-#     item = await Item.get(name='Test Item')
-#     assert item is not None
-#     assert item.name == 'Test Item'
-#     assert item.description == 'This is a test item'
-
-
 @pytest.mark.asyncio
 async def test_create_item(init_db):
     '''

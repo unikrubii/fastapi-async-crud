@@ -9,6 +9,12 @@ This application allows users to perform basic CRUD operations on Item model wit
 - **Updating** an item by ID
 - **Deleting** an item by ID
 
+## Links to Sections:
+- [Setup Instruction - Local environment](#local-environment)
+- [API Usage Examples](#api-usage-examples)
+- [Testing Instructions](#testing-instructions)
+
+
 ## Setup Instruction
 
 ### Local environment
@@ -123,7 +129,7 @@ Response
 { "message": "Item with id 1 deleted successfully" }
 ```
 
-## Testing Instruction
+## Testing Instructions
 ### Running test
 To run all tests, use the following command:
 ``` bash

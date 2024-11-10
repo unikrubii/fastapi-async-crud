@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./data/database.db
+    command: ["fastapi", "run"]
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

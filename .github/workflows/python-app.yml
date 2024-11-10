@@ -17,15 +17,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: sqlite
-        options: '--health-cmd "sqlite3 /app/data/database.db .databases || exit 1" --health-interval 5s --health-timeout 5s --health-retries 3'
-        volumes:
-          - ./data:/app/data
-        env:
-          DATABASE_URL: "sqlite:///./data/database.db"
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

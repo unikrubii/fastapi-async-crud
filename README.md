@@ -10,7 +10,9 @@ This application allows users to perform basic CRUD operations on Item model wit
 - **Deleting** an item by ID
 
 ## Links to Sections:
-- [Setup Instruction - Local environment](#local-environment)
+- Setup Instruction
+  - [Local environment](#local-environment)
+  - [Production environment with Docker](#production-environment-with-docker)
 - [API Usage Examples](#api-usage-examples)
 - [Testing Instructions](#testing-instructions)
 
@@ -18,6 +20,9 @@ This application allows users to perform basic CRUD operations on Item model wit
 ## Setup Instruction
 
 ### Local environment
+
+#### Prerequisite
+- Python 3.9 or higher
 
 #### 1. Clone the repository
 ``` bash
@@ -36,23 +41,40 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Run the application
+#### 4. Run the application
 start FastAPI server with the following command
 ``` bash
 fastapi dev app/main.py
 ```
 
-This will start the server at http://127.0.0.1:8000. You can test the API endpoints by navigating to:
+This will start the server at http://127.0.0.1:8000.  
+The FastAPI documentation is available at http://127.0.0.1:8000/docs.
+
+### Production environment with Docker
+
+#### 1. Build docker image
+``` bash
+docker-compose build
+```
+
+#### 2. Run the application in detached mode
+``` bash
+docker-compose up -d
+```
+
+#### 3. Stop the application
+``` bash
+docker-compose down
+```
+
+## API Usage examples
+You can test the API endpoints by navigating to:
 - `POST /items/` - Create a new item
 - `GET /items/` - Get all items
 - `GET /items/{item_id}/` - Get a specific item by ID
 - `PUT /items/{item_id}/` - Update an item by ID
 - `DELETE /items/{item_id}/` - Delete an item by ID
 
-The FastAPI documentation is available at http://127.0.0.1:8000/docs.
-
-
-## API Usage examples
 ### 1. Create an item (Post `/items/`)
 Request
 ``` bash

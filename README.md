@@ -22,7 +22,7 @@ This application allows users to perform basic CRUD operations on Item model wit
 ### Local environment
 
 #### Prerequisite
-- Python 3.9 or higher
+- Python 3.10 or higher
 
 #### 1. Clone the repository
 ``` bash
